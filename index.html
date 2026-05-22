@@ -69,6 +69,13 @@
 
     body {
       font-family: 'Rubik', sans-serif;
+      touch-action: manipulation;
+    }
+
+    #main-clicker {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     ::-webkit-scrollbar {
@@ -452,27 +459,33 @@
     }
 
     @media (max-width: 1024px) {
-
       .sidebar-left,
       .sidebar-right {
-        display: none;
-      }
-
-      .sidebar-left.open,
-      .sidebar-right.open {
-        display: flex;
         position: fixed;
         top: 58px;
         bottom: 44px;
         z-index: 100;
+        display: flex !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+        background-color: #1c1b1b !important;
       }
 
-      .sidebar-left.open {
+      .sidebar-left {
         left: 0;
+        transform: translateX(-100%);
+        border-right: 3px solid #da251d;
       }
 
-      .sidebar-right.open {
+      .sidebar-right {
         right: 0;
+        transform: translateX(100%);
+        border-left: 3px solid #da251d;
+      }
+
+      .sidebar-left.open,
+      .sidebar-right.open {
+        transform: translateX(0);
       }
     }
   </style>
@@ -483,6 +496,9 @@
   <!-- TOAST -->
   <div id="toast-container" class="fixed top-16 right-3 z-[200] flex flex-col gap-1.5 pointer-events-none"
     style="max-width:280px;"></div>
+
+  <!-- MOBILE SIDEBAR OVERLAY BACKDROP -->
+  <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-[2px] z-30 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
 
   <!-- LEVEL UP OVERLAY -->
   <div id="level-up-overlay" class="fixed inset-0 z-[150] flex items-center justify-center pointer-events-none hidden">
@@ -1318,18 +1334,40 @@
       if (!m.classList.contains('hidden')) renderUpgrades();
     }
     function toggleSidebar(side) {
+      const leftSidebar = document.querySelector('.sidebar-left');
+      const rightSidebar = document.querySelector('.sidebar-right');
+      const overlay = document.getElementById('mobile-sidebar-overlay');
+
       if (side === 'left') {
-        document.querySelector('.sidebar-left').classList.toggle('open');
-        document.querySelector('.sidebar-right').classList.remove('open');
+        leftSidebar.classList.toggle('open');
+        rightSidebar.classList.remove('open');
       } else {
-        document.querySelector('.sidebar-right').classList.toggle('open');
-        document.querySelector('.sidebar-left').classList.remove('open');
+        rightSidebar.classList.toggle('open');
+        leftSidebar.classList.remove('open');
+      }
+
+      const isOpen = leftSidebar.classList.contains('open') || rightSidebar.classList.contains('open');
+      if (isOpen) {
+        overlay.classList.remove('pointer-events-none', 'opacity-0');
+        overlay.classList.add('opacity-100');
+      } else {
+        overlay.classList.add('pointer-events-none', 'opacity-0');
+        overlay.classList.remove('opacity-100');
       }
     }
-    document.getElementById('center-area').addEventListener('click', () => {
+
+    function closeMobileSidebars() {
       document.querySelector('.sidebar-left').classList.remove('open');
       document.querySelector('.sidebar-right').classList.remove('open');
-    });
+      const overlay = document.getElementById('mobile-sidebar-overlay');
+      if (overlay) {
+        overlay.classList.add('pointer-events-none', 'opacity-0');
+        overlay.classList.remove('opacity-100');
+      }
+    }
+
+    document.getElementById('center-area').addEventListener('click', closeMobileSidebars);
+    document.getElementById('mobile-sidebar-overlay').addEventListener('click', closeMobileSidebars);
 
     // ── FORMAT ──
     function formatNumber(n) {
