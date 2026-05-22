@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html class="dark" lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
+  <title>INDOMIE CLICKER — Kosan Edition 🍜</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Space+Mono:wght@400;700&family=Rubik:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary-fixed": "#ffe07d",
+            "surface-tint": "#ffb4a9",
+            "primary-fixed-dim": "#ffb4a9",
+            "tertiary-fixed-dim": "#ffb59e",
+            "tertiary": "#ffb59e",
+            "on-error-container": "#ffdad6",
+            "secondary": "#ffda57",
+            "on-surface": "#e5e2e1",
+            "on-tertiary": "#5d1800",
+            "surface-dim": "#131313",
+            "surface": "#131313",
+            "outline": "#ad8883",
+            "secondary-container": "#e6bd00",
+            "surface-container-lowest": "#0e0e0e",
+            "on-background": "#e5e2e1",
+            "surface-variant": "#353535",
+            "surface-bright": "#393939",
+            "surface-container-highest": "#353535",
+            "primary-container": "#da251d",
+            "primary-fixed": "#ffdad5",
+            "primary": "#ffb4a9",
+            "surface-container-high": "#2a2a2a",
+            "error-container": "#93000a",
+            "inverse-surface": "#e5e2e1",
+            "on-secondary": "#3b2f00",
+            "error": "#ffb4ab",
+            "on-primary-container": "#fff3f1",
+            "on-primary": "#690002",
+            "inverse-primary": "#bf080b",
+            "on-surface-variant": "#9e8e8b",
+            "surface-container-low": "#1c1b1b",
+            "on-error": "#690005",
+            "background": "#131313",
+            "surface-container": "#20201f",
+          },
+          fontFamily: {
+            "headline": ["Bricolage Grotesque"],
+            "mono": ["Space Mono"],
+            "body": ["Rubik"],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1c1b1b;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #da251d;
+      border-radius: 3px;
+    }
+
+    @keyframes float-up {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.4) rotate(15deg);
+      }
+    }
+
+    @keyframes float-emoji {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.6);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(-60px) scale(1.2);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-130px) scale(0.8) rotate(30deg);
+      }
+    }
+
+    @keyframes steam {
+
+      0%,
+      100% {
+        transform: translateY(0) scaleX(1);
+        opacity: 0.12;
+      }
+
+      50% {
+        transform: translateY(-28px) scaleX(1.3);
+        opacity: 0.45;
+      }
+    }
+
+    @keyframes fire-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 30px rgba(218, 37, 29, 0.3), 0 0 60px rgba(218, 37, 29, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 50px rgba(218, 37, 29, 0.6), 0 0 100px rgba(255, 100, 0, 0.3);
+      }
+    }
+
+    @keyframes lava-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 40px rgba(255, 80, 0, 0.4), 0 0 80px rgba(218, 37, 29, 0.2), inset 0 0 30px rgba(255, 100, 0, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 70px rgba(255, 80, 0, 0.7), 0 0 120px rgba(218, 37, 29, 0.4), inset 0 0 50px rgba(255, 100, 0, 0.3);
+      }
+    }
+
+    @keyframes neraka-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.5), 0 0 100px rgba(180, 0, 0, 0.3), 0 0 150px rgba(100, 0, 0, 0.2);
+        filter: hue-rotate(0deg);
+      }
+
+      33% {
+        box-shadow: 0 0 70px rgba(255, 50, 0, 0.7), 0 0 130px rgba(200, 0, 0, 0.5), 0 0 180px rgba(150, 0, 0, 0.3);
+        filter: hue-rotate(10deg);
+      }
+
+      66% {
+        box-shadow: 0 0 60px rgba(255, 0, 50, 0.6), 0 0 110px rgba(180, 0, 50, 0.4), 0 0 160px rgba(100, 0, 50, 0.2);
+        filter: hue-rotate(-10deg);
+      }
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(100vw);
+      }
+
+      100% {
+        transform: translateX(-200%);
+      }
+    }
+
+    @keyframes notif-slide {
+      0% {
+        transform: translateX(120%);
+        opacity: 0;
+      }
+
+      10% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      90% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(120%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bowl-click {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(0.93);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes level-up-flash {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      30% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+
+    @keyframes save-pulse {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      20% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      80% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+
+    @keyframes bg-warp {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes title-pulse {
+
+      0%,
+      100% {
+        text-shadow: 4px 4px 0px #da251d;
+      }
+
+      50% {
+        text-shadow: 4px 4px 0px #da251d, 0 0 20px rgba(255, 218, 87, 0.4);
+      }
+    }
+
+    .float-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: float-up 0.9s ease-out forwards;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      text-shadow: 3px 3px 0px #000;
+    }
+
+    .float-emoji {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: float-emoji 1.2s ease-out forwards;
+      font-size: 28px;
+    }
+
+    .steam-line {
+      animation: steam 2.5s infinite ease-in-out;
+    }
+
+    .neobrutal {
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    }
+
+    .neobrutal-red {
+      box-shadow: 4px 4px 0px 0px #da251d;
+    }
+
+    .neobrutal-yellow {
+      box-shadow: 4px 4px 0px 0px #e6bd00;
+    }
+
+    .ticker-scroll {
+      display: inline-flex;
+      gap: 60px;
+      white-space: nowrap;
+      animation: ticker 40s linear infinite;
+    }
+
+    .notif-toast {
+      animation: notif-slide 4s ease-in-out forwards;
+    }
+
+    .bowl-click-anim {
+      animation: bowl-click 0.12s ease-out;
+    }
+
+    .level-up-ring {
+      animation: level-up-flash 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    .save-indicator {
+      animation: save-pulse 1.5s ease-out forwards;
+      pointer-events: none;
+    }
+
+    .bowl-level-1 {
+      box-shadow: 10px 10px 0px 0px rgba(218, 37, 29, 1) !important;
+    }
+
+    .bowl-level-2 {
+      animation: fire-glow 2s infinite;
+    }
+
+    .bowl-level-3 {
+      animation: lava-pulse 1.5s infinite;
+    }
+
+    .bowl-level-4 {
+      animation: lava-pulse 1.2s infinite;
+      filter: saturate(1.4);
+    }
+
+    .bowl-level-5 {
+      animation: neraka-pulse 1s infinite;
+    }
+
+    .bowl-level-6 {
+      animation: neraka-pulse 0.8s infinite;
+      filter: saturate(1.8) brightness(1.1);
+    }
+
+    .bowl-level-7 {
+      animation: neraka-pulse 0.6s infinite;
+      filter: saturate(2) brightness(1.2) contrast(1.1);
+    }
+
+    .bg-kosan {
+      background: linear-gradient(180deg, #131313 0%, #1a1510 100%);
+    }
+
+    .bg-warteg {
+      background: linear-gradient(180deg, #131313 0%, #1c1008 100%);
+    }
+
+    .bg-volcano {
+      background: linear-gradient(180deg, #1a0a05 0%, #2d0a00 50%, #1a0500 100%);
+    }
+
+    .bg-neraka {
+      background: linear-gradient(270deg, #1a0000, #2d0a00, #0d0000, #1a0500);
+      background-size: 400% 400%;
+      animation: bg-warp 8s ease infinite;
+    }
+
+    .bowl-title-text {
+      animation: title-pulse 2s ease-in-out infinite;
+    }
+
+    .autosave-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4caf50;
+      display: inline-block;
+      animation: save-dot-blink 3s infinite;
+    }
+
+    @keyframes save-dot-blink {
+
+      0%,
+      90%,
+      100% {
+        opacity: 0.3;
+      }
+
+      95% {
+        opacity: 1;
+      }
+    }
+
+    /* Upgrade button hover */
+    .upgrade-btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 1) !important;
+    }
+
+    .upgrade-btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: none !important;
+    }
+
+    /* Divider */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9e8e8b;
+    }
+
+    /* Stat card */
+    .stat-card {
+      background: #20201f;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      border-radius: 2px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    /* Modal overlays */
+    .modal-overlay {
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    @media (max-width: 1024px) {
+
+      .sidebar-left,
+      .sidebar-right {
+        display: none;
+      }
+
+      .sidebar-left.open,
+      .sidebar-right.open {
+        display: flex;
+        position: fixed;
+        top: 58px;
+        bottom: 44px;
+        z-index: 100;
+      }
+
+      .sidebar-left.open {
+        left: 0;
+      }
+
+      .sidebar-right.open {
+        right: 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface overflow-hidden h-screen flex flex-col bg-kosan" id="game-body">
+
+  <!-- TOAST -->
+  <div id="toast-container" class="fixed top-16 right-3 z-[200] flex flex-col gap-1.5 pointer-events-none"
+    style="max-width:280px;"></div>
+
+  <!-- LEVEL UP OVERLAY -->
+  <div id="level-up-overlay" class="fixed inset-0 z-[150] flex items-center justify-center pointer-events-none hidden">
+    <div class="text-center px-6">
+      <h2 class="font-headline text-5xl md:text-7xl font-extrabold text-secondary"
+        style="text-shadow: 5px 5px 0px #da251d;" id="level-up-text">LEVEL UP!</h2>
+      <p class="font-mono text-base text-primary font-bold mt-2" id="level-up-name"></p>
+    </div>
+  </div>
+
+  <!-- TOP NAV -->
+  <header
+    class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-3 md:px-5 h-[58px] border-b-[3px] border-on-background bg-surface-container-low"
+    style="box-shadow: 0 3px 0 0 #da251d;">
+    <div class="flex items-center gap-2 md:gap-4">
+      <button class="lg:hidden p-1.5 text-secondary hover:text-on-surface transition-colors"
+        onclick="toggleSidebar('left')">
+        <span class="material-symbols-outlined text-xl">storefront</span>
+      </button>
+      <div class="flex items-center gap-2">
+        <h1 class="font-headline text-xl md:text-3xl font-extrabold italic uppercase text-secondary leading-none"
+          style="text-shadow: 2px 2px 0px #da251d;">INDOMIE CLICKER</h1>
+        <span
+          class="hidden md:block font-mono text-[10px] text-on-surface-variant border border-on-surface-variant/30 px-1.5 py-0.5 rounded">KOSAN
+          EDITION</span>
+      </div>
+      <!-- Evolution bar desktop -->
+      <div
+        class="hidden md:flex items-center gap-2 bg-surface-container border border-on-surface-variant/20 px-2 py-1 rounded">
+        <span class="font-mono text-[10px] text-on-surface-variant">EVO</span>
+        <div class="w-28 h-2 bg-surface rounded-full overflow-hidden border border-on-background/30">
+          <div
+            class="h-full bg-gradient-to-r from-secondary to-primary-container transition-all duration-500 rounded-full"
+            id="evolution-progress" style="width:0%"></div>
+        </div>
+        <span class="font-mono text-[10px] font-bold text-secondary" id="level-display">LVL 1</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-0.5 md:gap-1">
+      <button class="p-2 hover:text-secondary text-primary-fixed-dim transition-colors" onclick="toggleShop()"
+        title="Warung Upgrade">
+        <span class="material-symbols-outlined text-[18px]">storefront</span>
+      </button>
+      <button class="p-2 hover:text-secondary text-primary-fixed-dim transition-colors" onclick="manualSave()"
+        title="Save">
+        <span class="material-symbols-outlined text-[18px]">save</span>
+      </button>
+      <button class="p-2 hover:text-secondary text-primary-fixed-dim transition-colors" onclick="toggleSettings()"
+        title="Settings">
+        <span class="material-symbols-outlined text-[18px]">settings</span>
+      </button>
+      <button class="p-2 hover:text-secondary text-primary-fixed-dim transition-colors" onclick="toggleSound()"
+        id="sound-btn" title="Sound">
+        <span class="material-symbols-outlined text-[18px]">volume_up</span>
+      </button>
+      <button class="lg:hidden p-1.5 text-primary hover:text-secondary transition-colors"
+        onclick="toggleSidebar('right')">
+        <span class="material-symbols-outlined text-xl">emoji_events</span>
+      </button>
+      <div class="hidden md:flex items-center gap-1.5 ml-2 pl-2 border-l border-on-surface-variant/20">
+        <span class="autosave-dot" id="autosave-dot"></span>
+        <span class="font-mono text-[9px] text-on-surface-variant" id="last-save-text">—</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN GAME -->
+  <main class="flex-1 flex mt-[58px] mb-[44px] overflow-hidden">
+
+    <!-- LEFT SIDEBAR: UPGRADES -->
+    <aside
+      class="sidebar-left w-[264px] xl:w-[280px] h-full border-r-2 border-on-background/60 bg-surface-container-low flex flex-col z-40">
+      <!-- Header -->
+      <div class="px-3 py-2 border-b-2 border-on-background/60 flex items-center justify-between bg-surface-container">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-base"
+            style="font-variation-settings:'FILL' 1;">storefront</span>
+          <span class="font-headline text-sm font-extrabold text-secondary uppercase">Warung Upgrades</span>
+        </div>
+        <div class="flex gap-1">
+          <button
+            class="font-mono text-[10px] font-bold px-2 py-0.5 border border-on-background/40 hover:border-secondary hover:text-secondary transition-colors"
+            onclick="setBuyMode(1)" id="buy-1x">1x</button>
+          <button
+            class="font-mono text-[10px] font-bold px-2 py-0.5 border border-on-background/40 hover:border-secondary hover:text-secondary transition-colors"
+            onclick="setBuyMode(10)" id="buy-10x">10x</button>
+        </div>
+      </div>
+      <!-- Upgrade list -->
+      <div class="flex-1 overflow-y-auto p-2 space-y-1.5" id="upgrade-list"></div>
+    </aside>
+
+    <!-- CENTER: BOWL -->
+    <section class="flex-1 relative flex flex-col items-center justify-center p-4 overflow-hidden" id="center-area">
+      <!-- Dot pattern bg -->
+      <div class="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style="background-image: radial-gradient(#da251d 1.5px, transparent 1.5px); background-size: 28px 28px;"></div>
+
+      <!-- Mobile evo bar -->
+      <div class="md:hidden flex items-center gap-2 mb-4 w-full max-w-[280px]">
+        <span class="font-mono text-[9px] text-on-surface-variant">EVO</span>
+        <div class="flex-1 h-2 bg-surface rounded-full overflow-hidden border border-on-background/30">
+          <div
+            class="h-full bg-gradient-to-r from-secondary to-primary-container transition-all duration-500 rounded-full"
+            id="evolution-progress-mobile" style="width:0%"></div>
+        </div>
+        <span class="font-mono text-[9px] font-bold text-secondary" id="level-display-mobile">LVL 1</span>
+      </div>
+
+      <!-- Steam -->
+      <div class="absolute pointer-events-none flex gap-4" id="steam-container"
+        style="top: 8%; left: 50%; transform: translateX(-50%);">
+        <span class="material-symbols-outlined text-white/20 text-3xl steam-line"
+          style="animation-delay:0s;">waves</span>
+        <span class="material-symbols-outlined text-white/20 text-5xl steam-line"
+          style="animation-delay:0.5s;">waves</span>
+        <span class="material-symbols-outlined text-white/20 text-3xl steam-line"
+          style="animation-delay:0.2s;">waves</span>
+      </div>
+
+      <!-- Bowl + Title Stack -->
+      <div class="flex flex-col items-center gap-3 select-none" id="bowl-container">
+
+        <!-- Bowl circle (no text inside) -->
+        <div
+          class="relative w-[230px] h-[230px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px] rounded-full border-[5px] md:border-[7px] border-on-background flex items-center justify-center overflow-hidden cursor-pointer transition-all duration-150 bowl-level-1"
+          id="main-clicker">
+          <img alt="Indomie Bowl" class="w-full h-full object-cover" id="bowl-img"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd798ZClm0jHeW50Upoqj531uGr3XGrgCTpIk_C07flF1dFMtsYgCfQ2zIe01hYn27sNoP1wzrHh3hx-sHtAp3qPFYjpKZHjjxX_IzgcXS-dfXorl4aZaVZBD_sqrOi0gPx9x-xw0Ab3JM8dmKxGZXpHwyK_IrG_26KrSrYEluSoApVrilp93sHzp9eLe2GkkNJHYR8wEWVSjLUuUaLahBbhQVRTNePPijE3esEE1ZYplXV8GLNhOyFBP7OzxlBes-bFDNeuFmOLU" />
+          <!-- subtle overlay only -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none">
+          </div>
+        </div>
+
+        <!-- Bowl Title — OUTSIDE the circle -->
+        <div class="text-center px-4">
+          <p class="font-headline text-xl md:text-2xl lg:text-3xl font-extrabold text-white uppercase leading-tight bowl-title-text"
+            id="bowl-title">INDOMIE BIASA</p>
+          <p class="font-mono text-[10px] text-on-surface-variant mt-0.5" id="bowl-subtitle">Level 1 · Klik untuk masak!
+          </p>
+        </div>
+      </div>
+
+      <!-- Stats below bowl -->
+      <div class="mt-4 md:mt-5 flex flex-col items-center gap-1.5">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-3xl md:text-4xl"
+            style="font-variation-settings: 'FILL' 1;">restaurant</span>
+          <h2 class="font-headline text-4xl md:text-5xl lg:text-[56px] font-extrabold text-secondary leading-none"
+            style="text-shadow: 4px 4px 0px #da251d;" id="total-rasa">0</h2>
+        </div>
+        <p class="section-label">Total Rasa Terkumpul</p>
+        <div class="flex items-center gap-3 mt-1">
+          <span class="font-mono text-xs text-primary" id="rps-display">+0 /detik</span>
+          <span class="text-on-surface-variant/30">·</span>
+          <span class="font-mono text-xs text-on-surface-variant" id="click-power-display">Click: 1</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: STATS & ACHIEVEMENTS -->
+    <aside
+      class="sidebar-right w-[264px] xl:w-[280px] h-full border-l-2 border-on-background/60 bg-surface-container-low flex flex-col z-40">
+      <!-- Header -->
+      <div class="px-3 py-2 border-b-2 border-on-background/60 flex items-center gap-2 bg-surface-container">
+        <span class="material-symbols-outlined text-secondary text-base"
+          style="font-variation-settings:'FILL' 1;">monitoring</span>
+        <span class="font-headline text-sm font-extrabold text-secondary uppercase">Kosan Stats</span>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="px-2 pt-2 grid grid-cols-2 gap-1.5">
+        <div class="stat-card">
+          <p class="section-label mb-1">Clicks</p>
+          <p class="font-mono text-sm font-bold text-primary" id="stat-clicks">0</p>
+        </div>
+        <div class="stat-card">
+          <p class="section-label mb-1">Lifetime</p>
+          <p class="font-mono text-sm font-bold text-primary" id="stat-lifetime">0</p>
+        </div>
+        <div class="stat-card">
+          <p class="section-label mb-1">Per Click</p>
+          <p class="font-mono text-sm font-bold text-secondary" id="stat-perclick">1</p>
+        </div>
+        <div class="stat-card">
+          <p class="section-label mb-1">Per Detik</p>
+          <p class="font-mono text-sm font-bold text-secondary" id="stat-rps">0</p>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="px-2 pt-3 flex items-center justify-between mb-1.5">
+        <div class="flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-secondary text-sm"
+            style="font-variation-settings:'FILL' 1;">emoji_events</span>
+          <span class="section-label text-secondary">Achievements</span>
+        </div>
+        <span class="font-mono text-[10px] text-on-surface-variant" id="ach-counter">0/0</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-2 space-y-1.5" id="achievements-list"></div>
+
+      <!-- Event timer -->
+      <div class="px-2 py-2 border-t-2 border-on-background/40 mt-auto">
+        <div class="bg-surface-container border border-on-surface-variant/20 px-3 py-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-surface-variant text-sm">casino</span>
+          <p class="font-mono text-[10px] text-on-surface-variant">Event berikutnya: <span
+              class="text-secondary font-bold" id="event-timer">30</span>s</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- SHOP MODAL -->
+  <div class="fixed inset-0 z-[120] hidden" id="shop-modal">
+    <div class="modal-overlay absolute inset-0" onclick="toggleShop()"></div>
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-xl max-h-[82vh] bg-surface-container border-[3px] border-on-background neobrutal-red overflow-hidden flex flex-col">
+      <div class="px-4 py-3 bg-primary-container border-b-[3px] border-on-background flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-primary-container"
+            style="font-variation-settings:'FILL' 1;">storefront</span>
+          <h2 class="font-headline text-lg font-extrabold text-on-primary-container uppercase">Warung Upgrade Lengkap
+          </h2>
+        </div>
+        <button class="p-1 hover:rotate-90 transition-transform text-on-primary-container" onclick="toggleShop()">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+      <div class="p-3 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-2.5" id="shop-grid"></div>
+      <div
+        class="px-4 py-2.5 border-t-2 border-on-background/60 bg-surface-container-high flex justify-between items-center">
+        <span class="font-mono text-xs text-on-surface-variant">💰 <span class="text-secondary font-bold"
+            id="shop-rasa">0</span> Rasa</span>
+        <span class="font-mono text-[10px] text-on-surface-variant italic opacity-60">"Rasa adalah investasi."</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div class="fixed inset-0 z-[130] hidden" id="settings-modal">
+    <div class="modal-overlay absolute inset-0" onclick="toggleSettings()"></div>
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88vw] max-w-sm bg-surface-container border-[3px] border-on-background neobrutal-red overflow-hidden flex flex-col">
+      <div class="px-4 py-3 bg-primary-container border-b-[3px] border-on-background flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-primary-container text-xl">settings</span>
+          <h2 class="font-headline text-base font-extrabold text-on-primary-container uppercase">Pengaturan Kosan</h2>
+        </div>
+        <button class="p-1 hover:rotate-90 transition-transform text-on-primary-container" onclick="toggleSettings()">
+          <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+      </div>
+      <div class="p-3 space-y-2 overflow-y-auto">
+        <!-- Save status -->
+        <div class="bg-surface-container-high border border-on-surface-variant/20 p-3">
+          <p class="section-label text-secondary mb-2">💾 Status Save</p>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="autosave-dot"></span>
+            <span class="font-mono text-[10px] text-on-surface-variant">Autosave aktif (tiap 5 detik)</span>
+          </div>
+          <p class="font-mono text-[10px] text-on-surface-variant">Terakhir: <span id="settings-last-save">—</span></p>
+          <p class="font-mono text-[10px] text-on-surface-variant">Ukuran: <span id="settings-save-size">—</span></p>
+        </div>
+
+        <button
+          class="settings-btn w-full py-2 px-3 bg-secondary-container text-on-secondary border border-on-background font-mono text-xs font-bold neobrutal transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+          onclick="manualSave()">💾 Save Sekarang</button>
+        <button
+          class="settings-btn w-full py-2 px-3 bg-surface-variant text-on-surface border border-on-background font-mono text-xs font-bold neobrutal transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+          onclick="exportSave()">📤 Export Save</button>
+        <button
+          class="settings-btn w-full py-2 px-3 bg-surface-variant text-on-surface border border-on-background font-mono text-xs font-bold neobrutal transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+          onclick="document.getElementById('import-file').click()">📥 Import Save</button>
+        <input type="file" id="import-file" accept=".json" class="hidden" onchange="importSave(event)" />
+        <button
+          class="settings-btn w-full py-2 px-3 bg-surface-variant text-on-surface border border-on-background font-mono text-xs font-bold neobrutal transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+          onclick="copySaveCode()">📋 Copy Save Code</button>
+        <button
+          class="settings-btn w-full py-2 px-3 bg-surface-variant text-on-surface border border-on-background font-mono text-xs font-bold neobrutal transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+          onclick="pasteSaveCode()">📝 Paste Save Code</button>
+        <hr class="border-on-background/20 my-1" />
+        <button
+          class="settings-btn w-full py-2 px-3 bg-error-container text-on-error-container border border-on-background font-mono text-xs font-bold neobrutal-red transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+          onclick="resetGame()">🗑️ Reset Game</button>
+        <p class="font-mono text-[9px] text-on-surface-variant text-center italic opacity-60 pt-1">"Data tersimpan di
+          browser. Export untuk backup!"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVE FLOATING -->
+  <div id="save-floating" class="fixed bottom-14 left-1/2 -translate-x-1/2 z-[60] hidden">
+    <div
+      class="save-indicator bg-surface-container-high border border-secondary px-4 py-1.5 font-mono text-xs font-bold text-secondary flex items-center gap-2">
+      <span class="material-symbols-outlined text-sm">check_circle</span>
+      <span id="save-floating-text">Game Tersimpan!</span>
+    </div>
+  </div>
+
+  <!-- NEWS TICKER -->
+  <footer
+    class="fixed bottom-0 left-0 w-full h-[44px] bg-primary-container border-t-[3px] border-on-background flex items-center overflow-hidden z-50">
+    <div
+      class="bg-black h-full flex items-center px-3 text-white font-mono text-[11px] font-bold italic z-10 border-r-2 border-on-background shrink-0">
+      📺 BREAKING</div>
+    <div class="ticker-scroll flex items-center text-on-primary-container font-mono text-[11px] font-bold uppercase"
+      id="ticker-text">
+      <span class="mr-16">🌶️ HARGA CABE NAIK, WARGA KOSAN DEMO!</span>
+      <span class="mr-16">🍜 TETANGGA SEBELAH LAGI MASAK MIE, BAUNYA SAMPAI SINI.</span>
+      <span class="mr-16">😱 ANAK KOSAN TERCIDUK MAKAN MIE PAKE NASI DI TANGGAL TUA.</span>
+      <span class="mr-16">🔥 INDOMIE GORENG VS REBUS: PERDEBATAN ABADI BELUM USAI.</span>
+      <span class="mr-16">💀 KOKI KOSAN NYOLONG RASA LAGI, WASPADA!</span>
+      <span class="mr-16">🥚 HARGA TELUR NAIK 200%, UPGRADE TELUR KORUPSI TETAP JALAN.</span>
+      <span class="mr-16">🧑‍🍳 MASTERCHEF KOSAN SEASON 69 DIBUKA.</span>
+      <span class="mr-16">⚡ PLN PADAMKAN LISTRIK, AIR PANAS LISTRIK MATI TOTAL.</span>
+      <span class="mr-16">👻 PENAMPAKAN MIE INSTAN PREMIUM DI INDOMARET JAM 3 PAGI.</span>
+      <span class="mr-16">🏆 PRESTIGE MODE: MASAK ULANG DARI LEVEL 1 TAPI LEBIH KUAT.</span>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════
+    //  INDOMIE CLICKER — GAME ENGINE
+    // ═══════════════════════════════════════
+
+    // ── AUDIO ──
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+    }
+    function playClick() {
+      if (!soundEnabled || !audioCtx) return;
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(800 + Math.random() * 400, audioCtx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.1);
+      g.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+      o.start(); o.stop(audioCtx.currentTime + 0.12);
+    }
+    function playLevelUp() {
+      if (!soundEnabled || !audioCtx) return;
+      [0, 0.1, 0.2, 0.3].forEach((delay, i) => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        o.type = 'square';
+        o.frequency.setValueAtTime([523, 659, 784, 1047][i], audioCtx.currentTime + delay);
+        g.gain.setValueAtTime(0.08, audioCtx.currentTime + delay);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + 0.15);
+        o.start(audioCtx.currentTime + delay);
+        o.stop(audioCtx.currentTime + delay + 0.15);
+      });
+    }
+    function playBuy() {
+      if (!soundEnabled || !audioCtx) return;
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(400, audioCtx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.08);
+      g.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+      o.start(); o.stop(audioCtx.currentTime + 0.15);
+    }
+    function playEvent() {
+      if (!soundEnabled || !audioCtx) return;
+      [0, 0.08, 0.16].forEach((d, i) => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime([300, 500, 300][i], audioCtx.currentTime + d);
+        g.gain.setValueAtTime(0.06, audioCtx.currentTime + d);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d + 0.1);
+        o.start(audioCtx.currentTime + d);
+        o.stop(audioCtx.currentTime + d + 0.1);
+      });
+    }
+    function toggleSound() {
+      initAudio(); soundEnabled = !soundEnabled;
+      document.getElementById('sound-btn').querySelector('span').textContent = soundEnabled ? 'volume_up' : 'volume_off';
+    }
+
+    // ── LEVELS ──
+    const LEVELS = [
+      { level: 1, name: "Indomie Biasa", emoji: "🍜", bgClass: "bg-kosan", bowlClass: "bowl-level-1" },
+      { level: 5, name: "Indomie Pake Telor", emoji: "🥚", bgClass: "bg-kosan", bowlClass: "bowl-level-1" },
+      { level: 10, name: "Indomie Spesial Kos", emoji: "✨", bgClass: "bg-kosan", bowlClass: "bowl-level-1" },
+      { level: 20, name: "Indomie Goreng", emoji: "🔥", bgClass: "bg-warteg", bowlClass: "bowl-level-2" },
+      { level: 35, name: "Indomie Goreng Double", emoji: "💪", bgClass: "bg-warteg", bowlClass: "bowl-level-2" },
+      { level: 50, name: "Indomie Goreng Lava", emoji: "🌋", bgClass: "bg-volcano", bowlClass: "bowl-level-3" },
+      { level: 65, name: "Indomie Carbonara KW", emoji: "🧀", bgClass: "bg-volcano", bowlClass: "bowl-level-3" },
+      { level: 80, name: "Indomie Rendang Gila", emoji: "🐂", bgClass: "bg-volcano", bowlClass: "bowl-level-4" },
+      { level: 100, name: "Indomie Racun Ayam", emoji: "☠️", bgClass: "bg-neraka", bowlClass: "bowl-level-5" },
+      { level: 120, name: "Indomie Sultan Mentai", emoji: "👑", bgClass: "bg-neraka", bowlClass: "bowl-level-5" },
+      { level: 150, name: "Indomie Setan Merah", emoji: "👹", bgClass: "bg-neraka", bowlClass: "bowl-level-6" },
+      { level: 180, name: "Indomie MasterChef Neraka", emoji: "🧑‍🍳", bgClass: "bg-neraka", bowlClass: "bowl-level-6" },
+      { level: 200, name: "Indomie Neraka Kosan", emoji: "💀", bgClass: "bg-neraka", bowlClass: "bowl-level-7" },
+      { level: 250, name: "Indomie Dewa Rasa", emoji: "🙏", bgClass: "bg-neraka", bowlClass: "bowl-level-7" },
+      { level: 300, name: "Indomie Akhir Zaman", emoji: "🌌", bgClass: "bg-neraka", bowlClass: "bowl-level-7" },
+    ];
+
+    // ── UPGRADES ──
+    const UPGRADES = {
+      telur_korupsi: {
+        name: "🥚 Telur Korupsi",
+        desc: "Kadang kasih +2, kadang ilang -1. Korupsi emang gitu.",
+        flavor: "\"Kayak pacar, kadang ada kadang nggak.\"",
+        baseCost: 15, type: "click",
+        effect: (gs) => { gs.clickPower += 1; }, shopOnly: false,
+      },
+      saus_sambal_setan: {
+        name: "🌶️ Saus Sambal Setan",
+        desc: "+3 Rasa per detik. Pedasnya bikin nangis.",
+        flavor: "\"Lidah langsung hilang.\"",
+        baseCost: 100, type: "auto",
+        effect: (gs) => { gs.autoClickerPower += 3; }, shopOnly: false,
+      },
+      koki_kosan: {
+        name: "🧑‍🍳 Koki Kosan",
+        desc: "+8 Rasa/detik, tapi kadang nyolong 5% Rasa.",
+        flavor: "\"Masaknya jago, nyolongnya juga jago.\"",
+        baseCost: 500, type: "auto",
+        effect: (gs) => { gs.autoClickerPower += 8; gs.kokiStealChance += 0.02; }, shopOnly: false,
+      },
+      indomie_tengah_malam: {
+        name: "🌙 Indomie Tengah Malam",
+        desc: "Multiplier 2x antara jam 22:00–04:00.",
+        flavor: "\"Jam 2 pagi itu beda dimensi rasanya.\"",
+        baseCost: 2000, type: "multiplier",
+        effect: (gs) => { gs.midnightMultiplier += 0.5; }, shopOnly: false,
+      },
+      air_panas_listrik: {
+        name: "⚡ Air Panas Listrik",
+        desc: "+15 Rasa/detik. Masak 10x lebih cepet.",
+        flavor: "\"Tinggal colok, tinggal tuang.\"",
+        baseCost: 3000, type: "auto",
+        effect: (gs) => { gs.autoClickerPower += 15; }, shopOnly: true,
+      },
+      topping_korupsi: {
+        name: "🎲 Topping Korupsi",
+        desc: "Random event +50% lebih sering.",
+        flavor: "\"Bisa untung, bisa buntung.\"",
+        baseCost: 5000, type: "special",
+        effect: (gs) => { gs.eventFrequencyBonus += 0.3; }, shopOnly: true,
+      },
+      tetangga_pinjem: {
+        name: "🏠 Tetangga Pinjem",
+        desc: "+20 Rasa/detik, tapi tiap 60 detik ngambil random Rasa.",
+        flavor: "\"Besok ganti... (bohong).\"",
+        baseCost: 8000, type: "auto",
+        effect: (gs) => { gs.autoClickerPower += 20; gs.tetanggaStealActive = true; }, shopOnly: true,
+      },
+      mie_premium: {
+        name: "💎 Mie Instan Premium",
+        desc: "PRESTIGE! Reset semua, tapi mulai dgn 2x base click power.",
+        flavor: "\"Mulai dari awal, tapi lebih kuat.\"",
+        baseCost: 50000, type: "prestige",
+        effect: (gs) => { }, shopOnly: true,
+      },
+    };
+
+    // ── ACHIEVEMENTS ──
+    const ACHIEVEMENTS = [
+      { id: "first_cook", name: "Baru Pertama Kali Masak", desc: "Klik 10 kali", icon: "flatware", check: gs => gs.clicks >= 10 },
+      { id: "pedas_mampus", name: "Pedas Mampus", desc: "Beli Saus Sambal Setan", icon: "local_fire_department", check: gs => gs.upgrades.saus_sambal_setan?.count > 0 },
+      { id: "jam_4_pagi", name: "Makan Jam 4 Pagi", desc: "Main antara jam 2–5 pagi", icon: "dark_mode", check: gs => { const h = new Date().getHours(); return h >= 2 && h < 5; } },
+      { id: "rasa_1000", name: "Seribuan Rasa", desc: "Kumpulkan 1.000 Rasa", icon: "stars", check: gs => gs.lifetimeRasa >= 1000 },
+      { id: "rasa_100k", name: "Sultan Rasa", desc: "Kumpulkan 100.000 Rasa", icon: "diamond", check: gs => gs.lifetimeRasa >= 100000 },
+      { id: "rasa_1m", name: "Dewa Indomie", desc: "Kumpulkan 1.000.000 Rasa", icon: "temple_buddhist", check: gs => gs.lifetimeRasa >= 1000000 },
+      { id: "click_100", name: "Jari Pegel", desc: "Klik 100 kali", icon: "back_hand", check: gs => gs.clicks >= 100 },
+      { id: "click_1000", name: "Carpal Tunnel Kosan", desc: "Klik 1.000 kali", icon: "healing", check: gs => gs.clicks >= 1000 },
+      { id: "click_10000", name: "Jari Baja", desc: "Klik 10.000 kali", icon: "hardware", check: gs => gs.clicks >= 10000 },
+      { id: "level_10", name: "Mulai Serius", desc: "Capai Level 10", icon: "trending_up", check: gs => gs.level >= 10 },
+      { id: "level_50", name: "Setengah Jalan Neraka", desc: "Capai Level 50", icon: "whatshot", check: gs => gs.level >= 50 },
+      { id: "level_100", name: "Level 100 Neraka", desc: "Capai Level 100", icon: "skull", check: gs => gs.level >= 100 },
+      { id: "level_200", name: "Neraka Kosan Tercapai", desc: "Capai Level 200", icon: "volcano", check: gs => gs.level >= 200 },
+      { id: "juragan_mie", name: "Juragan Mie", desc: "Punya 50 total upgrade", icon: "store", check: gs => getTotalUpgradeCount(gs) >= 50 },
+      { id: "midnight_masak", name: "Tukang Masak Malam", desc: "Beli Indomie Tengah Malam", icon: "nightlight", check: gs => gs.upgrades.indomie_tengah_malam?.count > 0 },
+      { id: "prestige", name: "Reborn Kosan", desc: "Lakukan Prestige pertama", icon: "autorenew", check: gs => gs.prestigeCount > 0 },
+    ];
+
+    function getTotalUpgradeCount(gs) {
+      return Object.values(gs.upgrades).reduce((sum, u) => sum + (u?.count || 0), 0);
+    }
+
+    // ── GAME STATE ──
+    let GS = createFreshState();
+    function createFreshState() {
+      return {
+        rasa: 0, lifetimeRasa: 0, clicks: 0, level: 1,
+        clickPower: 1, autoClickerPower: 0, clickMultiplier: 1,
+        midnightMultiplier: 0, kokiStealChance: 0,
+        tetanggaStealActive: false, eventFrequencyBonus: 0,
+        prestigeCount: 0, prestigeBonus: 1,
+        upgrades: {}, achievements: [],
+        lastSaveTime: Date.now(), buyMode: 1, totalEvents: 0,
+      };
+    }
+
+    // ── DOM ──
+    const $body = document.getElementById('game-body');
+    const $rasaDisplay = document.getElementById('total-rasa');
+    const $levelDisplay = document.getElementById('level-display');
+    const $levelMobile = document.getElementById('level-display-mobile');
+    const $evoProgress = document.getElementById('evolution-progress');
+    const $evoProgressM = document.getElementById('evolution-progress-mobile');
+    const $clicker = document.getElementById('main-clicker');
+    const $bowlTitle = document.getElementById('bowl-title');
+    const $bowlSubtitle = document.getElementById('bowl-subtitle');
+    const $rpsDisplay = document.getElementById('rps-display');
+    const $clickPwrDisp = document.getElementById('click-power-display');
+    const $statClicks = document.getElementById('stat-clicks');
+    const $statLifetime = document.getElementById('stat-lifetime');
+    const $statPerclick = document.getElementById('stat-perclick');
+    const $statRps = document.getElementById('stat-rps');
+    const $achList = document.getElementById('achievements-list');
+    const $achCounter = document.getElementById('ach-counter');
+    const $upgradeList = document.getElementById('upgrade-list');
+    const $shopGrid = document.getElementById('shop-grid');
+    const $shopRasa = document.getElementById('shop-rasa');
+    const $eventTimer = document.getElementById('event-timer');
+    const $steamContainer = document.getElementById('steam-container');
+    const $toastContainer = document.getElementById('toast-container');
+
+    // ── CLICK ──
+    function handleClick(e) {
+      initAudio();
+      const effectivePower = getEffectiveClickPower();
+      let bonus = 0, bonusText = '';
+      if ((GS.upgrades.telur_korupsi?.count || 0) > 0) {
+        const roll = Math.random();
+        if (roll < 0.10) { bonus = Math.floor(effectivePower * 0.5); bonusText = ' 🥚+BONUS!'; }
+        else if (roll < 0.25) { bonus = -Math.min(Math.floor(effectivePower * 0.3), GS.rasa); bonusText = ' 🥚KORUPSI!'; }
+      }
+      const total = effectivePower + bonus;
+      GS.rasa += total;
+      GS.lifetimeRasa += Math.max(0, total);
+      GS.clicks++;
+
+      const rect = $clicker.getBoundingClientRect();
+      const x = e.clientX || (rect.left + rect.width / 2);
+      const y = e.clientY || (rect.top + rect.height / 4);
+      createFloatingText(x, y, `+${total}${bonusText}`);
+      spawnClickEmoji(x, y);
+
+      $clicker.classList.remove('bowl-click-anim');
+      void $clicker.offsetWidth;
+      $clicker.classList.add('bowl-click-anim');
+      playClick();
+      checkLevelUp(); checkAchievements(); updateUI();
+    }
+
+    $clicker.addEventListener('mousedown', handleClick);
+    $clicker.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      const t = e.touches[0];
+      handleClick({ clientX: t.clientX, clientY: t.clientY });
+    }, { passive: false });
+
+    function getEffectiveClickPower() {
+      let p = GS.clickPower * GS.clickMultiplier * GS.prestigeBonus;
+      if (GS.midnightMultiplier > 0) {
+        const h = new Date().getHours();
+        if (h >= 22 || h < 4) p *= (1 + GS.midnightMultiplier);
+      }
+      return Math.floor(p);
+    }
+    function getEffectiveRPS() {
+      let r = GS.autoClickerPower * GS.prestigeBonus;
+      if (GS.midnightMultiplier > 0) {
+        const h = new Date().getHours();
+        if (h >= 22 || h < 4) r *= (1 + GS.midnightMultiplier);
+      }
+      return r;
+    }
+
+    // ── PARTICLES ──
+    const clickEmojis = ['🍜', '🥢', '🌶️', '🔥', '💨', '🥚', '✨', '💥', '😋', '🤤'];
+    function createFloatingText(x, y, text) {
+      const el = document.createElement('div');
+      el.className = 'float-particle';
+      el.style.cssText = `left:${x + (Math.random() - 0.5) * 40}px;top:${y}px;font-size:${Math.min(22 + GS.level * 0.3, 46)}px;color:#ffda57;`;
+      el.textContent = text;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 900);
+    }
+    function spawnClickEmoji(x, y) {
+      if (Math.random() > 0.4) return;
+      const el = document.createElement('div');
+      el.className = 'float-emoji';
+      el.style.cssText = `left:${x + (Math.random() - 0.5) * 80}px;top:${y - 20}px;`;
+      el.textContent = clickEmojis[Math.floor(Math.random() * clickEmojis.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }
+
+    // ── UPGRADES ──
+    let buyMode = 1;
+    function setBuyMode(n) {
+      buyMode = n; GS.buyMode = n;
+      const b1 = document.getElementById('buy-1x');
+      const b10 = document.getElementById('buy-10x');
+      b1.classList.toggle('border-secondary', n === 1);
+      b1.classList.toggle('text-secondary', n === 1);
+      b10.classList.toggle('border-secondary', n === 10);
+      b10.classList.toggle('text-secondary', n === 10);
+      renderUpgrades();
+    }
+    function getUpgradeCost(id, extraCount = 0) {
+      const def = UPGRADES[id];
+      const count = (GS.upgrades[id]?.count || 0) + extraCount;
+      return Math.floor(def.baseCost * Math.pow(1.15, count));
+    }
+    function getBulkCost(id, amount) {
+      let total = 0;
+      for (let i = 0; i < amount; i++) total += getUpgradeCost(id, i);
+      return total;
+    }
+    function buyUpgrade(id, amount = buyMode) {
+      initAudio();
+      const def = UPGRADES[id];
+      if (!def) return;
+      if (def.type === 'prestige') {
+        if (GS.rasa >= def.baseCost) doPrestige();
+        return;
+      }
+      let bought = 0;
+      for (let i = 0; i < amount; i++) {
+        const cost = getUpgradeCost(id);
+        if (GS.rasa < cost) break;
+        GS.rasa -= cost;
+        if (!GS.upgrades[id]) GS.upgrades[id] = { count: 0 };
+        GS.upgrades[id].count++;
+        def.effect(GS);
+        bought++;
+      }
+      if (bought > 0) {
+        playBuy();
+        showToast(`🛒 Beli ${def.name} x${bought}!`, 'secondary');
+        checkAchievements(); updateUI(); renderUpgrades(); saveGame();
+      }
+    }
+    function doPrestige() {
+      GS.prestigeCount++;
+      const newBonus = GS.prestigeBonus + 1;
+      const keepAch = [...GS.achievements];
+      const keepPrestige = GS.prestigeCount;
+      GS = createFreshState();
+      GS.prestigeCount = keepPrestige;
+      GS.prestigeBonus = newBonus;
+      GS.achievements = keepAch;
+      playLevelUp();
+      showToast(`💎 PRESTIGE #${keepPrestige}! Base x${newBonus}`, 'primary-container');
+      renderAll(); saveGame();
+    }
+
+    function renderUpgrades() {
+      const sidebarItems = Object.entries(UPGRADES).filter(([, v]) => !v.shopOnly);
+      $upgradeList.innerHTML = sidebarItems.map(([id, def]) => {
+        const cost = buyMode === 1 ? getUpgradeCost(id) : getBulkCost(id, buyMode);
+        const count = GS.upgrades[id]?.count || 0;
+        const canAfford = GS.rasa >= cost;
+        return `<button class="upgrade-btn w-full text-left bg-surface-container border border-on-background/50 p-2 neobrutal transition-all ${canAfford ? '' : 'opacity-50'}" onclick="buyUpgrade('${id}')">
+      <div class="flex justify-between items-center gap-2">
+        <div class="min-w-0 flex-1">
+          <p class="font-mono text-[11px] font-bold text-secondary truncate">${def.name} <span class="text-on-surface-variant font-normal">[${count}]</span></p>
+          <p class="text-[10px] text-on-surface-variant leading-tight mt-0.5 line-clamp-1">${def.desc}</p>
+        </div>
+        <div class="flex items-center gap-0.5 shrink-0">
+          <span class="${canAfford ? 'text-secondary' : 'text-error'} font-mono text-[11px] font-bold">${formatNumber(cost)}</span>
+          <span class="material-symbols-outlined text-[13px] ${canAfford ? 'text-secondary' : 'text-error'}" style="font-variation-settings:'FILL' 1;">restaurant</span>
+        </div>
+      </div>
+    </button>`;
+      }).join('');
+
+      $shopGrid.innerHTML = Object.entries(UPGRADES).map(([id, def]) => {
+        const cost = buyMode === 1 ? getUpgradeCost(id) : getBulkCost(id, buyMode);
+        const count = GS.upgrades[id]?.count || 0;
+        const canAfford = GS.rasa >= cost;
+        return `<button class="upgrade-btn w-full text-left bg-surface-container-high border border-on-background/60 p-3 neobrutal-red transition-all ${canAfford ? '' : 'opacity-40'}" onclick="buyUpgrade('${id}')">
+      <div class="flex justify-between items-start gap-2 mb-1">
+        <p class="font-mono text-xs font-bold text-secondary">${def.name} <span class="text-on-surface-variant text-[10px]">[${count}]</span></p>
+        <span class="section-label text-on-surface-variant shrink-0">${def.type === 'prestige' ? 'RESET' : def.type.toUpperCase()}</span>
+      </div>
+      <p class="text-[11px] text-on-surface-variant">${def.desc}</p>
+      <p class="text-[10px] text-on-surface-variant italic mt-1 opacity-60">${def.flavor}</p>
+      <div class="mt-2 pt-2 border-t border-on-background/20">
+        <span class="font-mono text-xs font-bold ${canAfford ? 'text-secondary' : 'text-error'}">${formatNumber(cost)} 🍜</span>
+      </div>
+    </button>`;
+      }).join('');
+      $shopRasa.textContent = formatNumber(Math.floor(GS.rasa));
+    }
+
+    // ── LEVELS ──
+    function getLevelThreshold(level) {
+      return Math.floor(100 * Math.pow(1.12, level - 1));
+    }
+    function getCurrentLevelDef() {
+      let current = LEVELS[0];
+      for (const ld of LEVELS) { if (GS.level >= ld.level) current = ld; }
+      return current;
+    }
+    function checkLevelUp() {
+      let leveledUp = false, lastLd = null;
+      while (true) {
+        const threshold = getLevelThreshold(GS.level);
+        let cumulative = 0;
+        for (let i = 1; i < GS.level; i++) cumulative += getLevelThreshold(i);
+        if (GS.lifetimeRasa - cumulative >= threshold) {
+          GS.level++; leveledUp = true; lastLd = getCurrentLevelDef();
+        } else {
+          const progress = Math.min(((GS.lifetimeRasa - cumulative) / threshold) * 100, 100);
+          $evoProgress.style.width = `${progress}%`;
+          $evoProgressM.style.width = `${progress}%`;
+          break;
+        }
+      }
+      if (leveledUp && lastLd) {
+        applyLevelVisuals(lastLd);
+        showLevelUpOverlay(lastLd);
+        playLevelUp();
+      }
+    }
+    function applyLevelVisuals(ld) {
+      $bowlTitle.textContent = ld.name.toUpperCase();
+      $bowlSubtitle.textContent = `${ld.emoji} Level ${GS.level}`;
+      $clicker.className = $clicker.className.replace(/bowl-level-\d/g, '');
+      $clicker.classList.add(ld.bowlClass);
+      $body.classList.remove('bg-kosan', 'bg-warteg', 'bg-volcano', 'bg-neraka');
+      $body.classList.add(ld.bgClass);
+      const steamCount = Math.min(3 + Math.floor(GS.level / 20), 8);
+      let html = '';
+      for (let i = 0; i < steamCount; i++) {
+        const sizes = ['text-3xl', 'text-4xl', 'text-5xl', 'text-6xl'];
+        const sz = sizes[Math.floor(Math.random() * 4)];
+        const op = Math.min(0.15 + GS.level * 0.003, 0.6);
+        html += `<span class="material-symbols-outlined text-white/${Math.floor(op * 100)} ${sz} steam-line" style="animation-delay:${i * 0.3}s;">waves</span>`;
+      }
+      $steamContainer.innerHTML = html;
+    }
+    function showLevelUpOverlay(ld) {
+      const overlay = document.getElementById('level-up-overlay');
+      document.getElementById('level-up-text').textContent = `LEVEL ${GS.level}!`;
+      document.getElementById('level-up-name').textContent = `${ld.emoji} ${ld.name} ${ld.emoji}`;
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.add('hidden'), 2000);
+      showToast(`🎉 LEVEL UP! ${ld.emoji} ${ld.name}`, 'primary-container');
+    }
+
+    // ── ACHIEVEMENTS ──
+    function renderAchievements() {
+      $achList.innerHTML = ACHIEVEMENTS.map(ach => {
+        const unlocked = GS.achievements.includes(ach.id);
+        return `<div class="flex items-center gap-2 ${unlocked ? '' : 'opacity-30'} transition-all">
+      <div class="w-7 h-7 shrink-0 ${unlocked ? 'bg-secondary/15 border-secondary' : 'bg-surface-container border-on-background/20'} border flex items-center justify-center">
+        <span class="material-symbols-outlined text-xs" ${unlocked ? 'style="font-variation-settings:\'FILL\' 1;"' : ''}>${ach.icon}</span>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="font-mono text-[10px] font-bold leading-tight truncate">${ach.name}</p>
+        <p class="text-[9px] text-on-surface-variant leading-tight">${ach.desc}</p>
+      </div>
+      ${unlocked ? '<span class="text-secondary text-xs shrink-0">✓</span>' : ''}
+    </div>`;
+      }).join('');
+      $achCounter.textContent = `${GS.achievements.length}/${ACHIEVEMENTS.length}`;
+    }
+    function checkAchievements() {
+      for (const ach of ACHIEVEMENTS) {
+        if (!GS.achievements.includes(ach.id) && ach.check(GS)) {
+          GS.achievements.push(ach.id);
+          showToast(`🏆 Achievement: ${ach.name}!`, 'secondary-container');
+          playLevelUp(); renderAchievements();
+        }
+      }
+    }
+
+    // ── EVENTS ──
+    let eventCountdown = 30;
+    const EVENTS = [
+      { name: "🥚 Telur Bonus!", effect: gs => { const b = Math.floor(gs.level * 10 + 50); gs.rasa += b; return `+${b} Rasa!`; } },
+      { name: "🐀 Tikus Nyolong!", effect: gs => { const l = Math.floor(gs.rasa * 0.05); gs.rasa -= l; return `-${l} Rasa hilang!`; } },
+      { name: "🎉 Jackpot Bumbu!", effect: gs => { const b = Math.floor(gs.level * 25 + 100); gs.rasa += b; return `+${b} Rasa!`; } },
+      { name: "💸 Tanggal Tua", effect: gs => { const l = Math.floor(gs.rasa * 0.08); gs.rasa -= l; return `-${l} Rasa!`; } },
+      { name: "🔥 Kompor Meledak!", effect: gs => { const b = Math.floor(gs.level * 50); gs.rasa += b; gs.clickPower += 1; return `+${b} Rasa & +1 Click!`; } },
+      { name: "🧑‍🤝‍🧑 Temen Mampir", effect: gs => { const b = Math.floor(gs.level * 15 + 30); gs.rasa += b; return `+${b} Rasa!`; } },
+      { name: "😱 PLN Mati!", effect: gs => { gs._plnMati = 5; return `Auto-clicker mati 5 detik!`; } },
+      { name: "🏠 Tetangga Bayar Hutang!", effect: gs => { const b = Math.floor(gs.rasa * 0.15 + 200); gs.rasa += b; return `+${b} Rasa!`; } },
+      { name: "👻 Indomie Keramat", effect: gs => { gs.clickMultiplier *= 1.1; return `Click multiplier +10%!`; } },
+      { name: "🌶️ Challenge Sambal", effect: gs => { const b = Math.floor(gs.level * 30); gs.rasa += b; return `+${b} Rasa! Pedas!`; } },
+    ];
+    function triggerRandomEvent() {
+      const ev = EVENTS[Math.floor(Math.random() * EVENTS.length)];
+      const result = ev.effect(GS);
+      playEvent();
+      showToast(`${ev.name} ${result}`, 'surface-variant');
+      GS.totalEvents++;
+      updateUI();
+    }
+    function processSpecialEffects() {
+      if (GS.kokiStealChance > 0 && Math.random() < GS.kokiStealChance) {
+        const stolen = Math.floor(GS.rasa * 0.02);
+        GS.rasa -= stolen;
+        if (stolen > 0) showToast(`🧑‍🍳 Koki nyolong ${stolen} Rasa!`, 'error-container');
+      }
+      if (GS.tetanggaStealActive && Math.random() < 0.017) {
+        const stolen = Math.floor(GS.rasa * 0.03 + 10);
+        GS.rasa -= stolen;
+        if (stolen > 0) showToast(`🏠 Tetangga pinjem ${stolen} Rasa!`, 'error-container');
+      }
+    }
+
+    // ── TOASTS ──
+    function showToast(msg, bgClass = 'surface-container-high') {
+      const el = document.createElement('div');
+      el.className = `notif-toast pointer-events-auto px-3 py-2 bg-${bgClass} border border-on-background/60 neobrutal font-mono text-[11px] font-bold text-on-surface`;
+      el.textContent = msg;
+      $toastContainer.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+
+    // ── MODALS ──
+    function toggleShop() {
+      const m = document.getElementById('shop-modal');
+      m.classList.toggle('hidden');
+      if (!m.classList.contains('hidden')) renderUpgrades();
+    }
+    function toggleSidebar(side) {
+      if (side === 'left') {
+        document.querySelector('.sidebar-left').classList.toggle('open');
+        document.querySelector('.sidebar-right').classList.remove('open');
+      } else {
+        document.querySelector('.sidebar-right').classList.toggle('open');
+        document.querySelector('.sidebar-left').classList.remove('open');
+      }
+    }
+    document.getElementById('center-area').addEventListener('click', () => {
+      document.querySelector('.sidebar-left').classList.remove('open');
+      document.querySelector('.sidebar-right').classList.remove('open');
+    });
+
+    // ── FORMAT ──
+    function formatNumber(n) {
+      if (n >= 1e12) return (n / 1e12).toFixed(1) + 'T';
+      if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+      if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+      if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+      return Math.floor(n).toLocaleString('id-ID');
+    }
+
+    // ── UPDATE UI ──
+    function updateUI() {
+      const rps = getEffectiveRPS();
+      const clickPwr = getEffectiveClickPower();
+      $rasaDisplay.textContent = formatNumber(Math.floor(GS.rasa));
+      $levelDisplay.textContent = `LVL ${GS.level}`;
+      $levelMobile.textContent = `LVL ${GS.level}`;
+      $rpsDisplay.textContent = `+${formatNumber(rps)}/detik`;
+      $clickPwrDisp.textContent = `Click: ${formatNumber(clickPwr)}${GS.prestigeBonus > 1 ? ` (x${GS.prestigeBonus})` : ''}`;
+      $statClicks.textContent = formatNumber(GS.clicks);
+      $statLifetime.textContent = formatNumber(Math.floor(GS.lifetimeRasa));
+      $statPerclick.textContent = formatNumber(clickPwr);
+      $statRps.textContent = formatNumber(rps);
+      $eventTimer.textContent = eventCountdown;
+    }
+
+    // ── SAVE / LOAD ──
+    const SAVE_KEY = 'indomieClicker_v2';
+    let lastSaveDisplay = '—';
+
+    function saveGame(silent = true) {
+      GS.lastSaveTime = Date.now();
+      localStorage.setItem(SAVE_KEY, JSON.stringify(GS));
+      lastSaveDisplay = new Date().toLocaleTimeString('id-ID');
+      updateSaveIndicator(silent);
+    }
+    function updateSaveIndicator(silent) {
+      const els = ['last-save-text', 'settings-last-save'];
+      els.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = lastSaveDisplay; });
+      const sz = document.getElementById('settings-save-size');
+      if (sz) { const raw = localStorage.getItem(SAVE_KEY); sz.textContent = raw ? `${(raw.length / 1024).toFixed(1)} KB` : '—'; }
+      const dot = document.getElementById('autosave-dot');
+      if (dot) { dot.style.background = '#4caf50'; dot.style.opacity = '1'; setTimeout(() => { dot.style.opacity = ''; }, 500); }
+      if (!silent) {
+        const f = document.getElementById('save-floating');
+        f.classList.remove('hidden');
+        const inner = f.querySelector('.save-indicator');
+        inner.style.animation = 'none'; void inner.offsetWidth; inner.style.animation = '';
+        setTimeout(() => f.classList.add('hidden'), 1500);
+      }
+    }
+    function manualSave() { saveGame(false); playBuy(); showToast('💾 Game tersimpan!', 'secondary'); }
+    function exportSave() {
+      saveGame(true);
+      const data = localStorage.getItem(SAVE_KEY);
+      if (!data) { showToast('❌ Tidak ada save data!', 'error-container'); return; }
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `indomie_save_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('📤 File di-download!', 'secondary');
+    }
+    function importSave(event) {
+      const file = event.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (!parsed.clicks && parsed.clicks !== 0) throw new Error('Invalid save');
+          GS = { ...createFreshState(), ...parsed };
+          saveGame(false); renderAll();
+          showToast('📥 Save berhasil di-import!', 'secondary-container');
+        } catch { showToast('❌ File save tidak valid!', 'error-container'); }
+      };
+      reader.readAsText(file); event.target.value = '';
+    }
+    function copySaveCode() {
+      saveGame(true);
+      const data = localStorage.getItem(SAVE_KEY);
+      if (!data) { showToast('❌ Tidak ada save data!', 'error-container'); return; }
+      const encoded = btoa(unescape(encodeURIComponent(data)));
+      navigator.clipboard.writeText(encoded)
+        .then(() => showToast('📋 Save code di-copy!', 'secondary'))
+        .catch(() => prompt('Copy kode ini:', encoded));
+    }
+    function pasteSaveCode() {
+      const code = prompt('Paste save code:'); if (!code) return;
+      try {
+        const decoded = decodeURIComponent(escape(atob(code)));
+        const parsed = JSON.parse(decoded);
+        if (!parsed.clicks && parsed.clicks !== 0) throw new Error('Invalid');
+        GS = { ...createFreshState(), ...parsed };
+        saveGame(false); renderAll();
+        showToast('📝 Save code berhasil di-load!', 'secondary-container');
+      } catch { showToast('❌ Save code tidak valid!', 'error-container'); }
+    }
+    function loadGame() {
+      const raw = localStorage.getItem(SAVE_KEY); if (!raw) return;
+      try {
+        const saved = JSON.parse(raw);
+        GS = { ...createFreshState(), ...saved };
+        lastSaveDisplay = GS.lastSaveTime ? new Date(GS.lastSaveTime).toLocaleTimeString('id-ID') : 'Loaded';
+        const now = Date.now();
+        const offlineSec = Math.floor((now - (GS.lastSaveTime || now)) / 1000);
+        if (offlineSec > 5 && GS.autoClickerPower > 0) {
+          const idleEarning = Math.floor(GS.autoClickerPower * offlineSec * 0.3);
+          GS.rasa += idleEarning; GS.lifetimeRasa += idleEarning;
+          setTimeout(() => showToast(`💤 Offline ${formatDuration(offlineSec)}: +${formatNumber(idleEarning)} Rasa!`, 'secondary-container'), 500);
+        }
+      } catch (e) { console.error('Load failed:', e); }
+    }
+    function formatDuration(sec) {
+      if (sec < 60) return `${sec}s`;
+      if (sec < 3600) return `${Math.floor(sec / 60)}m`;
+      return `${Math.floor(sec / 3600)}h ${Math.floor((sec % 3600) / 60)}m`;
+    }
+    function resetGame() {
+      if (confirm('🗑️ Reset semua progress? Indomie-mu akan hilang semua!')) {
+        localStorage.removeItem(SAVE_KEY);
+        GS = createFreshState();
+        renderAll();
+        showToast('💨 Game di-reset! Mulai dari awal...', 'error-container');
+      }
+    }
+    function toggleSettings() {
+      const m = document.getElementById('settings-modal');
+      m.classList.toggle('hidden');
+      if (!m.classList.contains('hidden')) updateSaveIndicator(true);
+    }
+    window.addEventListener('beforeunload', () => saveGame(true));
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveGame(true); });
+
+    // ── RENDER ALL ──
+    function renderAll() {
+      const ld = getCurrentLevelDef();
+      applyLevelVisuals(ld);
+      renderUpgrades();
+      renderAchievements();
+      setBuyMode(GS.buyMode || 1);
+      updateUI();
+    }
+
+    // ── GAME LOOPS ──
+    setInterval(() => {
+      if (GS.autoClickerPower > 0 && !GS._plnMati) {
+        const gain = getEffectiveRPS() / 10;
+        GS.rasa += gain; GS.lifetimeRasa += gain;
+        checkLevelUp(); updateUI();
+      }
+      if (GS._plnMati) {
+        GS._plnMati -= 0.1;
+        if (GS._plnMati <= 0) { delete GS._plnMati; showToast('⚡ Listrik nyala lagi!', 'secondary'); }
+      }
+    }, 100);
+
+    setInterval(() => {
+      processSpecialEffects();
+      const eventInterval = Math.max(15, 30 - Math.floor(GS.eventFrequencyBonus * 10));
+      eventCountdown--;
+      if (eventCountdown <= 0) { triggerRandomEvent(); eventCountdown = eventInterval; }
+      checkAchievements(); renderUpgrades(); updateUI();
+    }, 1000);
+
+    setInterval(() => saveGame(true), 5000);
+
+    // ── INIT ──
+    loadGame();
+    renderAll();
+    setTimeout(() => { if (GS.clicks === 0) showToast('👆 Klik mangkuk untuk mulai masak!', 'secondary'); }, 2000);
+
+    console.log('%c🍜 INDOMIE CLICKER — KOSAN EDITION 🍜', 'font-size:20px; color:#ffda57; background:#da251d; padding:8px; font-weight:bold;');
+  </script>
+</body>
+
+</html>
